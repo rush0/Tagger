@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Omar Stewart - Tagging Plugin</title>
+    <script src="jquery-1.9.1.js"></script>
+    <script src="jquery-ui-1.10.1.js"></script>
+
+    <script src="Tagger.js"></script>
+    <style>
+        #tagInput {
+            display: block;
+            clear: both;
+        }
+
+        #selectedTags {
+            position: relative;
+        }
+
+        #selectedTags ul {
+            padding: 0px;
+            float: left;
+            position: absolute;
+        }
+
+        #selectedTags li {
+            float: left;
+            margin-left: 10px;
+            padding: 5px;
+            list-style-type: none;
+            background: #ececec;
+            border: 1px solid #000;
+            color: #000;
+        }
+
+        ul.ui-autocomplete {
+            padding-left: 0px;
+            background: #fff;
+        }
+
+        .ui-autocomplete li {
+            list-style-type: none;
+            padding-left: 0px;
+        }
+
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
+        .ui-menu-item:hover a, .ui-state-focus {
+            background: #efefef;
+        }
+
+        .ui-selecting {
+            background: #FECA40 !important;
+        }
+
+        .ui-selected {
+            background: #F39814 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" size="30" id="tagInput" />
+
+
+    <div id="selectedTags">
+        <ul></ul>
+    </div>
+
+    <script>
+        $("#tagInput").taggable({
+
+            delimmiter: ';',
+
+            tagContainer: $('#selectedTags ul'),
+
+            terms: ['yahoo', 'google', 'bing']
+        });
+
+    </script>
+</body>
+</html>
