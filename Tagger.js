@@ -15,11 +15,12 @@ if (typeof Object.create !== 'function') {
     }
 }
 
+// Plugin Function
 (function ($, window, document, undefined) {
 
 
     // Delete Tag from ui and array
-    var removeTag = function () {
+    var removeTag = function ( tagArray ) {
 
         var tag = $('li.ui-selected');
         //tagVal = tag.text();
@@ -28,7 +29,7 @@ if (typeof Object.create !== 'function') {
         tag.remove();
 
         // Remove from tags array
-        //tags.splice($.inArray(tagVal, tags), 1);
+        // tags.splice($.inArray(tagVal, tags), 1);
     };
 
     // Configure Selectable Handler
@@ -100,14 +101,15 @@ if (typeof Object.create !== 'function') {
                         evt.preventDefault();
 
                         var tagVal = ui.item.value;
-                        if (!!$.inArray(tagVal, tagger.tags)) {
+                        // Handle duplicates
+                        // if (!!$.inArray(tagVal, tagger.tags)) {
 
                             // Add to tag container
                             taglist.append($(tagger.options.tagWrapMarkup).append(tagVal));
 
                             // Add to tags array
                             tagger.tags.push(ui.item.value);
-                        }
+                        //}
                         tagger.clearTagInput();
                     }
             });
@@ -121,7 +123,7 @@ if (typeof Object.create !== 'function') {
             });
         },
 
-        // Clears input field when a suggestion is selected
+        // Removes term from input field when a suggestion is selected
         clearTagInput: function () {
             var tagVal = this.$elem.val();
             this.$elem.val(tagVal.substring(0, (tagVal.lastIndexOf(this.options.delimmiter) + 1)));
