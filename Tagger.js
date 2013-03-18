@@ -20,7 +20,7 @@ if (typeof Object.create !== 'function') {
 
 
     // Delete Tag from ui and array
-    var removeTag = function ( tagArray ) {
+    var removeTag = function (tagArray) {
 
         var tag = $('li.ui-selected');
         //tagVal = tag.text();
@@ -33,7 +33,7 @@ if (typeof Object.create !== 'function') {
     };
 
     // Configure Selectable Handler
-    var configSelectable =  function () {
+    var configSelectable = function () {
 
         $('html')
             .click(function () {
@@ -87,12 +87,15 @@ if (typeof Object.create !== 'function') {
 
                 source: function (req, resp) {
 
-                    resp($.ui.autocomplete.filter(
+                    $.getJSON(tagger.options.reqUrl, null, function (data) {
+                        resp($.ui.autocomplete.filter(
 
-                        terms,
+                        data,
 
                         req.term.split(acDelimitterExp).pop() // Last Term
+
                         ));
+                    });
                 },
 
                 // Suggestion Selected
@@ -104,11 +107,11 @@ if (typeof Object.create !== 'function') {
                         // Handle duplicates
                         // if (!!$.inArray(tagVal, tagger.tags)) {
 
-                            // Add to tag container
-                            taglist.append($(tagger.options.tagWrapMarkup).append(tagVal));
+                        // Add to tag container
+                        taglist.append($(tagger.options.tagWrapMarkup).append(tagVal));
 
-                            // Add to tags array
-                            tagger.tags.push(ui.item.value);
+                        // Add to tags array
+                        tagger.tags.push(ui.item.value);
                         //}
                         tagger.clearTagInput();
                     }
@@ -147,9 +150,7 @@ if (typeof Object.create !== 'function') {
     // Defaults
     $.fn.taggable.options = {
 
-        tagWrapMarkup: "<li class='ui-widget-content'></li>",
-
-        terms: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+        tagWrapMarkup: "<li class='ui-widget-content'></li>"
 
     };
 
